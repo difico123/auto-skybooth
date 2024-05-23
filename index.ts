@@ -1,7 +1,6 @@
 import { By } from "selenium-webdriver";
-import { clickElement, fillInputElement as fillInputElement } from "./base";
-
-const { Builder, } = require('selenium-webdriver');
+import { clickElement, fillInputElement } from "./base";
+import { Builder } from 'selenium-webdriver';
 
 (async function main() {
   // Set up the WebDriver

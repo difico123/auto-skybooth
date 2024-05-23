@@ -1,6 +1,6 @@
-import { By, Locator, until } from "selenium-webdriver";
+import { By, Locator, WebDriver, until } from "selenium-webdriver";
 
-export const fillInputElement = async (data: { driver: any, by: Locator, value: string }) => {
+export const fillInputElement = async (data: { driver: WebDriver, by: Locator | By, value: string }) => {
 
     const { driver, by, value } = data
     let inputElement = await driver.wait(
@@ -15,7 +15,7 @@ export const fillInputElement = async (data: { driver: any, by: Locator, value: 
     return result
 }
 
-export const clickElement = async (data: { driver: any, by: Locator }) => {
+export const clickElement = async (data: { driver: WebDriver, by: Locator | By }) => {
     const { driver, by } = data
 
     // Wait until the element is present
