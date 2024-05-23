@@ -2,6 +2,7 @@ import { clickElementWithId, clickElementWithXpath, fillInputElementWithXpath } 
 
 const { Builder, } = require('selenium-webdriver');
 
+
 (async function main() {
   // Set up the WebDriver
   let driver = await new Builder().forBrowser('chrome').build();
@@ -70,7 +71,6 @@ const { Builder, } = require('selenium-webdriver');
       driver,
       id: bankData.bankName
     })
-
     const bankNumberInput = '/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[3]/div/div[2]/form/div/div[2]/div/div/div[1]/div/div[1]/label/input[1]'
     await fillInputElementWithXpath({ driver, xpath: bankNumberInput, value: bankData.bankNumber })
     const bankNameInput = '/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[3]/div/div[2]/form/div/div[2]/div/div/div[2]/div/div[1]/label/input'

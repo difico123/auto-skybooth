@@ -7,6 +7,10 @@ export const fillInputElementWithXpath = async (data: { driver: any, xpath: stri
         until.elementLocated(By.xpath(xpath)),
         10000
     );
+
+    await driver.wait(until.elementIsVisible(inputElement), 10000);
+    await driver.wait(until.elementIsEnabled(inputElement), 10000);
+
     const result = await inputElement.sendKeys(value);
     return result
 }
@@ -19,7 +23,8 @@ export const clickElementWithXpath = async (data: { driver: any, xpath: string, 
         until.elementLocated(By.xpath(xpath)),
         10000
     );
-
+    await driver.wait(until.elementIsVisible(element), 10000);
+    await driver.wait(until.elementIsEnabled(element), 10000);
     // Execute JavaScript to click on the element
     const result = await driver.executeScript("arguments[0].click();", element);
 
@@ -39,4 +44,8 @@ export const clickElementWithId = async (data: { driver: any, id: string, }) => 
     const result = await driver.executeScript("arguments[0].click();", element);
 
     return result
+}
+
+export const delay = async (ms: number) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
