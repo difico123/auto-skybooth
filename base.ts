@@ -1,10 +1,10 @@
-import { By, until } from "selenium-webdriver";
+import { By, Locator, until } from "selenium-webdriver";
 
-export const fillInputElementWithXpath = async (data: { driver: any, xpath: string, value: string }) => {
+export const fillInputElement = async (data: { driver: any, by: Locator, value: string }) => {
 
-    const { driver, xpath, value } = data
+    const { driver, by, value } = data
     let inputElement = await driver.wait(
-        until.elementLocated(By.xpath(xpath)),
+        until.elementLocated(by),
         10000
     );
 
@@ -15,31 +15,16 @@ export const fillInputElementWithXpath = async (data: { driver: any, xpath: stri
     return result
 }
 
-export const clickElementWithXpath = async (data: { driver: any, xpath: string, }) => {
-    const { driver, xpath, } = data
+export const clickElement = async (data: { driver: any, by: Locator }) => {
+    const { driver, by } = data
 
     // Wait until the element is present
     let element = await driver.wait(
-        until.elementLocated(By.xpath(xpath)),
+        until.elementLocated(by),
         10000
     );
     await driver.wait(until.elementIsVisible(element), 10000);
     await driver.wait(until.elementIsEnabled(element), 10000);
-    // Execute JavaScript to click on the element
-    const result = await driver.executeScript("arguments[0].click();", element);
-
-    return result
-}
-
-export const clickElementWithId = async (data: { driver: any, id: string, }) => {
-    const { driver, id, } = data
-
-    // Wait until the element is present
-    let element = await driver.wait(
-        until.elementLocated(By.id(id)),
-        10000
-    );
-
     // Execute JavaScript to click on the element
     const result = await driver.executeScript("arguments[0].click();", element);
 
