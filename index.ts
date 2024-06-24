@@ -1,17 +1,18 @@
-import { By } from "selenium-webdriver";
-import { clickElement, fillInputElement } from "./base";
-import { Builder } from 'selenium-webdriver';
+import { clickElement, delay, fillInputElement } from "./base";
+import { Builder, By, } from 'selenium-webdriver';
 
 (async function main() {
   // Set up the WebDriver
   let driver = await new Builder().forBrowser('chrome').build();
 
   try {
+
+    const baseUrl = 'http://192.168.20.68:3000'
     // Navigate to the specified URL
-    await driver.get('http://192.168.20.68:3000/location/65ae26b25029dd43b0be74bc/step-1');
+    await driver.get(`${baseUrl}/location/65ae26b25029dd43b0be74bc/step-1`);
 
     // click preview image 
-    const previewImage = '//*[@id="app"]/div[2]/div/div/div/div[1]/div/div[3]/div/div[1]/div/img'
+    const previewImage = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div/div[3]/div/img'
     await clickElement({
       driver,
       by: By.xpath(previewImage)
@@ -25,13 +26,12 @@ import { Builder } from 'selenium-webdriver';
     })
 
     // move to step 2
-    // fill name
-    const nameInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[1]/div[1]/div/div/div[4]/input'
-    await fillInputElement({ driver, by: By.xpath(nameInput), value: 'duc' })
-
     // fill phone
-    const phoneInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[2]/div/div/div/div[4]/input'
+    const phoneInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[1]/div/div/div/div[4]/input'
     await fillInputElement({ driver, by: By.xpath(phoneInput), value: '0374993925' })
+    // fill email
+    const emailInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[3]/div/div/div/div[4]/input'
+    await fillInputElement({ driver, by: By.xpath(emailInput), value: 'ducnl@tokyotechlab.com' })
 
     // click next
     const nextButton = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[4]/button'
@@ -69,6 +69,8 @@ import { Builder } from 'selenium-webdriver';
       driver,
       by: By.id(bankData.bankName)
     })
+
+    await delay(2000)
     const bankNumberInput = '/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[3]/div/div[2]/form/div/div[2]/div/div/div[1]/div/div[1]/label/input[1]'
     await fillInputElement({ driver, by: By.xpath(bankNumberInput), value: bankData.bankNumber })
     const bankNameInput = '/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[3]/div/div[2]/form/div/div[2]/div/div/div[2]/div/div[1]/label/input'
@@ -87,6 +89,11 @@ import { Builder } from 'selenium-webdriver';
 
     const VNpaymentButton = '/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[3]/div/div[2]/form/div/div[3]/div/div[2]/button'
     await clickElement({ driver, by: By.xpath(VNpaymentButton) })
+
+
+    await delay(1000)
+
+    driver.executeScript(`const url = window.location.href.replace(window.location.origin,""); window.location.replace("http://192.168.20.68:3000"+url);`);
 
   } finally {
     // Close the WebDriver
