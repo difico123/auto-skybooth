@@ -11,6 +11,7 @@ import { Builder, By, } from 'selenium-webdriver';
     // Navigate to the specified URL
     await driver.get(`${baseUrl}/location/65ae26b25029dd43b0be74bc/step-1`);
 
+
     // click preview image 
     const previewImage = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div/div[3]/div/img'
     await clickElement({
@@ -28,10 +29,10 @@ import { Builder, By, } from 'selenium-webdriver';
     // move to step 2
     // fill phone
     const phoneInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[1]/div/div/div/div[4]/input'
-    await fillInputElement({ driver, by: By.xpath(phoneInput), value: '0374993925' })
+    await fillInputElement({ driver, by: By.xpath(phoneInput), value: '03749925' })
     // fill email
     const emailInput = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[3]/div[3]/div/div/div/div[4]/input'
-    await fillInputElement({ driver, by: By.xpath(emailInput), value: 'ducnl@tokyotechlab.com' })
+    await fillInputElement({ driver, by: By.xpath(emailInput), value: 'ducxnl@tokyotechlab.com' })
 
     // click next
     const nextButton = '/html/body/div[1]/div[2]/div/div/div/div[1]/div/div[4]/button'
